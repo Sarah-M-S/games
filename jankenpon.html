@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<h1>Jokenpô! Jogue contra o computador.</h1>
+<li>Regras:</li>
+<ul>Existem três movimentos: pedra, papel, tesoura</ul>
+<ul>Tesoura ganha de papel</ul>
+<ul>Papel ganha de pedra</ul>
+<ul>Pedra ganha de tesoura</ul>
+Insira no campo de texto em letras minúsculas qual é o seu movimento:
+
+<input/>
+<button> Jogar </button>
+
+<script>
+  var input = document.querySelector("input");
+
+  var jogadaComputador = function movimentoComputador() {
+    let jogadas = [0, 1, 2];
+    let sorteio = Math.floor(Math.random() * 3);
+    let movimento;
+
+    if (sorteio == 0) {
+      movimento = 'pedra';
+    } else if (sorteio == 1) {
+      movimento = 'papel';
+    } else if (sorteio == 2) {
+      movimento = 'tesoura';
+    }
+    return movimento;
+  };
+
+  function comparaJogadas() {
+    if (jogadaComputador() == input.value) {
+      alert("É um empate");
+    } else if (jogadaComputador() == 'pedra' && input.value == 'papel') {
+      alert(
+        "Movimento do computador: pedra \nO computador jogou pedra e perdeu! Parabéns você ganhou"
+      );
+    } else if (jogadaComputador() == 'papel' && input.value == 'tesoura') {
+      alert(
+        "Movimento do computador: papel \nO computador jogou papel e perdeu! Parabéns você ganhou"
+      );
+    } else if (jogadaComputador() == 'tesoura' && input.value == 'pedra') {
+      alert(
+        "Movimento do computador: tesoura \nO computador jogou tesoura e perdeu! Parabéns você ganhou"
+      );
+    } else if (input.value == 'pedra' && jogadaComputador() == 'papel') {
+      alert(
+        "Movimento do computador: papel \nO usuário jogou pedra e perdeu! Que pena, você perdeu"
+      );
+    } else if (input.value == 'papel' && jogadaComputador() == 'tesoura') {
+      alert(
+        "Movimento do computador: tesoura \nO usuário jogou papel e perdeu! Que pena, você perdeu"
+      );
+    } else if (input.value == 'tesoura' && jogadaComputador() == 'pedra') {
+      alert(
+        "Movimento do computador: pedra \nO usuário jogou tesoura e perdeu! Que pena, você perdeu"
+      );
+    }
+
+    input.value = "";
+    input.focus();
+  }
+
+  var button = document.querySelector("button");
+  button.addEventListener("click", comparaJogadas);
+</script>
